@@ -1,8 +1,11 @@
-const displayMessage = require('./0-console');
+/**
+ * Displays a message on the STDOUT.
+ * @param {String} msg The message to display.
+ * @author Bezaleel Olakunori <https://github.com/B3zaleel>
+ */
+const displayMessage = (msg) => {
+  console.log(msg);
+};
 
-test('displays message to stdout', () => {
-  console.log = jest.fn();
-  displayMessage('Hello NodeJS!');
-  expect(console.log).toHaveBeenCalledWith('Hello NodeJS!');
-});
+module.exports = displayMessage;
 
