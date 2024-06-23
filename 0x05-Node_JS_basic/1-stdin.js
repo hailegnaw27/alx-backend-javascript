@@ -1,22 +1,13 @@
-// 1-stdin.test.js
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-const { spawn } = require('child_process');
+process.stdin.on('readable', () => {
+  const chunk = process.stdin.read();
 
-test('stdin test', (done) => {
-  const process = spawn('node', ['1-stdin.js']);
-  process.stdin.write('John\n');
-  process.stdin.end();
-  
-  let data = '';
-  process.stdout.on('data', (chunk) => {
-    data += chunk.toString();
-  });
-
-  process.on('exit', () => {
-    expect(data).toContain('Welcome to Holberton School, what is your name?');
-    expect(data).toContain('Your name is: John');
-    expect(data).toContain('This important software is now closing');
-    done();
-  });
+  if (chunk) {
+    process.stdout.write(`Your name is: ${chunk}`);
+  }
 });
 
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
+});
